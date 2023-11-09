@@ -73,7 +73,7 @@ def check_index(elasticsearch, index_name):
         print(f"Index '{index_name}' already exists.")
 
 
-def consume_topics(consumer):
+def send_topics_to_es(consumer):
     for msg in consumer:
         payload = json.loads(msg.value)
         payload["meta_data"] = {
@@ -95,7 +95,7 @@ def run_consumer():
     check_index(es, os.getenv("KAFKA_TOPIC").lower())
     consumer = KafkaConsumer(os.getenv("KAFKA_TOPIC"),
                              auto_offset_reset='earliest')
-    consume_topics(consumer)
+    send_topics_to_es(consumer)
 
 
 run_consumer()

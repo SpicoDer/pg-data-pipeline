@@ -48,7 +48,7 @@ faker_instance = Faker()
 
 
 def run_producer():
-    for _ in range(10):
+    for _ in range(100):
         faker_data = {
             "first_name": faker_instance.first_name(),
             "city": faker_instance.city(),
@@ -64,5 +64,4 @@ def run_producer():
         sleep(int(os.getenv("PRODUCE_DELAY")))
 
 
-if __name__ == "__main__":
-    run_producer()
+run_producer()
